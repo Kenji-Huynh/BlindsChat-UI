@@ -1,41 +1,43 @@
 /* Responsive styles for BlindsChatGPT UI */
 
-@media (max-width: 768px) {
-  .sidebar {
-    position: fixed;
-    left: -260px;
-    top: 0;
-    bottom: 0;
-    z-index: 100;
-    transition: left 0.3s ease;
+/* === DESKTOP STYLES === */
+@media (min-width: 768px) {
+  /* Hiển thị layout desktop, ẩn layout mobile */
+  .mobile-plans {
+    display: none !important;
   }
 
-  .sidebar.show {
-    left: 0;
+  .plan-container {
+    display: flex !important;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
   }
 
-  .logo-mobile {
+  .pricing-plans {
+    padding: 0;
+    max-height: calc(100vh - 220px);
+    overflow: visible;
+  }
+
+  /* Tối ưu không gian */
+  .hosting-actions {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
   }
 
-  .menu-toggle {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--text-color);
+  .hosting-btn {
+    min-width: 180px;
   }
+}
 
-  .feature-buttons {
-    max-width: calc(100% - 40px);
-  }
-
-  .welcome-message h1 {
-    font-size: 28px;
-  }
-
+/* === TABLET STYLES === */
+@media (max-width: 768px) and (min-width: 577px) {
+  /* Header & Content adjustments */
   .header {
     padding: 10px 15px;
   }
@@ -50,6 +52,7 @@
     margin-bottom: 20px;
   }
 
+  /* Button adjustments */
   .actions {
     flex-wrap: wrap;
     justify-content: center;
@@ -62,39 +65,42 @@
   }
 }
 
-@media (max-width: 576px) {
-  .welcome-message h1 {
-    font-size: 24px;
+/* === MOBILE STYLES === */
+@media (max-width: 767px) {
+  /* 1. Ẩn/hiển thị plans theo thiết bị */
+  .plan-container {
+    display: none !important;
   }
 
-  .input-area {
-    padding: 12px;
+  .mobile-plans {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 15px;
   }
 
-  .feature-buttons {
-    max-width: calc(100% - 40px);
+  /* 2. Layout & containers */
+  .pricing-plans {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-bottom: 15px;
   }
 
-  .auth-buttons {
-    gap: 6px;
+  .pricing-plans::-webkit-scrollbar {
+    display: none;
   }
 
-  .btn-login,
-  .btn-signup {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-
-  .help-button {
-    bottom: 12px;
-    right: 12px;
-  }
-
-  .help-button button {
-    width: 32px;
-    height: 32px;
-  }
-
+  /* 3. Header elements */
   .header {
     padding: 10px;
   }
@@ -105,6 +111,10 @@
 
   .logo-container {
     padding: 8px;
+  }
+
+  .auth-buttons {
+    gap: 6px;
   }
 
   .login-btn,
@@ -120,50 +130,55 @@
     border: none;
   }
 
+  /* 4. Main content area */
   .main-content {
     padding: 10px;
-    height: calc(100vh - 50px);
+    padding-bottom: 100px;
+    height: 100vh;
+    position: relative;
     display: flex;
     flex-direction: column;
   }
 
-  .greeting {
-    font-size: 22px;
-    font-weight: 500;
-    margin: auto 0;
-    padding: 0 10px;
-    text-align: center;
+  .main-content:not(.has-messages) {
+    padding-bottom: 80px;
   }
 
+  /* 5. Input container */
   .input-actions-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    margin-top: auto;
-    padding: 10px 0;
+    padding: 10px 15px;
+    background-color: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    margin: 0;
   }
 
   .chat-input-container {
-    position: relative;
     width: 100%;
-    margin-bottom: 0;
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   .chat-input {
     width: 100%;
-    padding: 12px 40px 12px 15px;
+    padding: 10px 40px 10px 12px;
     font-size: 14px;
     border: 1px solid #e0e0e0;
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    max-height: 100px;
+    overflow-y: auto;
+    min-height: 45px;
   }
 
-  .mic-button {
-    position: absolute;
-    right: 12px;
-    bottom: 50%;
-    transform: translateY(50%);
-    background: transparent;
-    border: none;
-    cursor: pointer;
+  /* 6. Hidden elements on mobile */
+  .greeting {
+    display: none;
   }
 
   .actions {
@@ -173,10 +188,176 @@
   .help-btn {
     display: none;
   }
+}
+
+/* === MOBILE PLAN STYLES === */
+@media (max-width: 767px) {
+  /* 1. Mobile plan cards */
+  .mobile-plan {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  /* 2. Plan tags */
+  .mobile-plan-tag {
+    width: 70px;
+    height: 100%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .mobile-plan.startup .mobile-plan-tag {
+    background-color: #2174d8;
+  }
+
+  .mobile-plan.semi-pro .mobile-plan-tag {
+    background-color: #f18d24;
+  }
+
+  .mobile-plan.pro .mobile-plan-tag {
+    background-color: #df246b;
+  }
+
+  /* 3. Badge for featured plans */
+  .mobile-badge {
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    background-color: #2174d8;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(33, 116, 216, 0.3);
+    z-index: 2;
+  }
+
+  .mobile-badge.pro-badge {
+    background-color: #df246b;
+  }
+
+  /* 4. Plan details */
+  .mobile-plan-details {
+    flex: 1;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .mobile-plan-price {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 3px;
+  }
+
+  .mobile-current-price {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    margin-right: 8px;
+  }
+
+  .mobile-original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+  }
+
+  .mobile-plan-features {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.3;
+  }
+
+  /* 5. Period buttons */
+  .plan-period {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 15px 0;
+    gap: 5px;
+  }
+
+  .period-btn {
+    flex: 1;
+    padding: 8px 0;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    font-size: 13px;
+    text-align: center;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .period-btn.active {
+    background-color: #e6f0ff;
+    border-color: #2174d8;
+    color: #2174d8;
+    font-weight: 500;
+  }
+
+  /* 6. Hosting buttons */
+  .hosting-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .hosting-btn {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #2174d8;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(33, 116, 216, 0.2);
+    margin-bottom: 5px;
+  }
+
+  .hosting-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+}
+
+/* === CHAT MESSAGES STYLE === */
+@media (max-width: 767px) {
+  .main-content.has-messages {
+    justify-content: flex-start;
+  }
+
+  .main-content.has-messages .chat-messages {
+    flex: 1;
+    margin-bottom: 80px;
+  }
 
   .chat-messages {
     max-height: calc(100vh - 160px);
-    padding: 10px 0;
+    padding: 5px 0;
+    margin-bottom: 10px;
+    overflow-y: auto;
   }
 
   .message-content {
@@ -195,7 +376,144 @@
   }
 
   .disclaimer {
+    font-size: 10px;
+    position: fixed;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 3px 10px;
+    margin: 0;
+    z-index: 98;
+    width: 100%;
+    text-align: center;
+    color: #777;
+    display: block;
+  }
+
+  .main-content.has-messages .disclaimer {
+    display: block;
+  }
+
+  .main-content:not(.has-messages) .disclaimer {
+    display: none;
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    /* CSS specific to iOS devices */
+    .input-actions-container {
+      position: sticky;
+    }
+  }
+}
+
+/* === EXTRA SMALL SCREENS === */
+@media (max-width: 375px) {
+  .mobile-plan-tag {
+    width: 60px;
+    font-size: 13px;
+  }
+
+  .mobile-plan-details {
+    padding: 8px 10px;
+  }
+
+  .mobile-current-price {
+    font-size: 15px;
+  }
+
+  .period-btn {
     font-size: 11px;
-    margin-top: 5px;
+    padding: 6px 0;
+  }
+
+  .hosting-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+/* === LOW HEIGHT SCREENS === */
+@media (max-height: 600px) and (max-width: 767px) {
+  .pricing-plans {
+    padding-bottom: 85px;
+  }
+
+  .plan-period {
+    margin: 8px 0;
+  }
+
+  .period-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .hosting-btn {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .input-actions-container {
+    bottom: 22px;
+  }
+
+  .disclaimer {
+    bottom: 2px;
+  }
+}
+
+/* === DESKTOP OPTIMIZATIONS === */
+@media (min-width: 992px) {
+  body {
+    overflow: hidden;
+  }
+
+  .main-content {
+    height: calc(100vh - 70px);
+    overflow: hidden;
+  }
+
+  .chat-input {
+    min-height: 50px;
+  }
+
+  .pricing-plans {
+    padding-top: 30px;
+  }
+}
+
+/* Responsive styles cho send-btn */
+
+@media (max-width: 767px) {
+  .send-btn {
+    right: 12px;
+    bottom: 50%;
+    transform: translateY(50%);
+    padding: 4px;
+  }
+
+  .send-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .chat-input {
+    padding-right: 40px; /* Giảm padding khi màn hình nhỏ */
+  }
+}
+
+/* Trên màn hình rất nhỏ */
+@media (max-width: 375px) {
+  .send-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .send-btn {
+    right: 10px;
+  }
+
+  .chat-input {
+    padding-right: 35px;
   }
 }
