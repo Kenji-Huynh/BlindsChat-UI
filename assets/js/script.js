@@ -1,240 +1,252 @@
-// Chức năng phản hồi khi nhấn vào các nút
-document.querySelectorAll("button:not(.dropdown-option)").forEach((button) => {
-  button.addEventListener("click", function () {
-    if (!this.classList.contains("message-action-btn")) {
-      alert("Tính năng này đang được phát triển!");
-    }
-  });
-});
+/**
+ * BlindChat - JavaScript tối giản, dễ tích hợp API
+ */
 
-// Auto resize cho textarea
-const textarea = document.querySelector(".chat-input");
-if (textarea) {
-  textarea.addEventListener("input", function () {
-    this.style.height = "auto";
-    this.style.height = this.scrollHeight + "px";
-  });
-}
-
-// Cập nhật lại việc tạo mới đoạn chat
-const newChatOption = document.querySelector(".dropdown-option");
-if (newChatOption) {
-  newChatOption.addEventListener("click", function () {
-    // Xóa tất cả tin nhắn
-    const chatMessages = document.getElementById("chatMessages");
-    chatMessages.innerHTML = "";
-
-    // Reset layout về trạng thái ban đầu
-    const mainContent = document.querySelector(".main-content");
-    mainContent.classList.remove("has-messages");
-    document.querySelector(".greeting").style.display = "block";
-    document.querySelector(".chat-messages").style.display = "none";
-    document.querySelector(".disclaimer").style.display = "none";
-
-    alert("Đã tạo đoạn chat mới!");
-  });
-}
-
-// Xử lý gửi tin nhắn khi nhấn Enter
-document.getElementById("userInput").addEventListener("keydown", function (e) {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    handleSendMessage();
-  }
-});
-
-// Hàm xử lý gửi tin nhắn
-function handleSendMessage() {
+document.addEventListener("DOMContentLoaded", function () {
+  // === Các biến DOM cần thiết ===
+  const chatMessages = document.getElementById("chatMessages");
   const userInput = document.getElementById("userInput");
-  const message = userInput.value.trim();
+  const mainContent = document.querySelector(".main-content");
+  const sendButton = document.querySelector(".send-btn");
+  const periodBtns = document.querySelectorAll(".period-btn");
+  const newChatOption = document.querySelector(".dropdown-option");
 
-  if (message) {
-    // Hiển thị tin nhắn người dùng
-    addUserMessage(message);
+  // Auto-resize textarea
+  if (userInput) {
+    userInput.addEventListener("input", function () {
+      this.style.height = "auto";
+      this.style.height = this.scrollHeight + "px";
+    });
 
-    // Ẩn greeting, hiện chat messages và đổi layout
-    const mainContent = document.querySelector(".main-content");
-    mainContent.classList.add("has-messages");
-    document.querySelector(".greeting").style.display = "none";
-    document.querySelector(".chat-messages").style.display = "block";
-    document.querySelector(".disclaimer").style.display = "block";
+    // Enter để gửi tin nhắn (trừ khi dùng Shift+Enter)
+    userInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        handleSendMessage();
+      }
+    });
+  }
 
-    // Xử lý phản hồi
-    setTimeout(() => {
-      if (message.toLowerCase() === "hello") {
-        addBotMessage("Hi");
-      } else {
-        addBotMessage(
-          "Tính năng này vẫn đang được cập nhật, vui lòng chờ trong thời gian sớm nhất."
-        );
+  // Xử lý các nút thời gian trong pricing
+  if (periodBtns && periodBtns.length > 0) {
+    periodBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        periodBtns.forEach((b) => b.classList.remove("active"));
+        this.classList.add("active");
+      });
+    });
+  }
+
+  // Xử lý nút gửi tin nhắn nếu có
+  if (sendButton) {
+    sendButton.addEventListener("click", handleSendMessage);
+  }
+
+  // Xử lý tạo chat mới
+  if (newChatOption) {
+    newChatOption.addEventListener("click", resetChat);
+  }
+
+  // === CORE FUNCTIONS (cần thiết cho UI) ===
+
+  // Hàm gửi tin nhắn - sẽ được tích hợp với API
+  function handleSendMessage() {
+    const message = userInput.value.trim();
+    if (message) {
+      // Thêm tin nhắn của user vào giao diện
+      addUserMessage(message);
+
+      // Reset input
+      userInput.value = "";
+      userInput.style.height = "auto";
+
+      // Hiển thị đang gõ...
+      showTypingIndicator();
+
+      // ĐIỂM TÍCH HỢP API: Thay thế đoạn code sau bằng API call
+      setTimeout(function () {
+        hideTypingIndicator();
+        // Mock response - sẽ được thay bởi response API
+        const botResponse =
+          "Đây là nơi response từ API sẽ được hiển thị. Bạn chỉ cần thay đoạn này bằng kết quả từ API call.";
+        addBotMessage(botResponse);
+      }, 1000);
+    }
+  }
+
+  // Thêm tin nhắn của user
+  function addUserMessage(content) {
+    const messageHTML = `
+      <div class="message user-message">
+        <div class="message-container">
+          <div class="message-content">${escapeHTML(content)}</div>
+        </div>
+        <div class="message-actions">
+          <button class="message-action-btn edit-btn" onclick="editMessage(this)">
+            <img src="assets/img/Edit.svg" alt="Edit">Chỉnh sửa
+          </button>
+          <button class="message-action-btn copy-btn" onclick="copyMessage(this)">
+            <img src="assets/img/Copy.svg" alt="Copy">Sao chép
+          </button>
+        </div>
+      </div>
+    `;
+    appendMessageToChat(messageHTML);
+  }
+
+  // Thêm tin nhắn của bot
+  function addBotMessage(content) {
+    const messageHTML = `
+      <div class="message bot-message">
+        <div class="message-container">
+          <div class="message-content">${escapeHTML(content)}</div>
+        </div>
+        <div class="message-actions">
+          <button class="message-action-btn copy-btn" onclick="copyMessage(this)">
+            <img src="assets/img/Copy.svg" alt="Copy">Sao chép
+          </button>
+          <button class="message-action-btn like-btn" onclick="likeMessage(this)">
+            <img src="assets/img/Facebook Like.svg" alt="Like">Thích
+          </button>
+          <button class="message-action-btn dislike-btn" onclick="dislikeMessage(this)">
+            <img src="assets/img/Facebook Like.svg" alt="Dislike" style="transform: rotate(180deg)">Không thích
+          </button>
+        </div>
+      </div>
+    `;
+    appendMessageToChat(messageHTML);
+  }
+
+  // Thêm tin nhắn vào khung chat
+  function appendMessageToChat(messageHTML) {
+    if (chatMessages) {
+      // Nếu đây là tin nhắn đầu tiên, thêm class has-messages
+      if (!mainContent.classList.contains("has-messages")) {
+        mainContent.classList.add("has-messages");
       }
 
-      // Đảm bảo scroll đến dưới cùng sau khi bot trả lời
-      scrollToBottom();
-    }, 500);
-
-    // Xóa nội dung input
-    userInput.value = "";
-    userInput.style.height = "auto";
-
-    // Scroll đến dưới cùng sau khi gửi tin nhắn
-    scrollToBottom();
-  }
-}
-
-// Hàm scroll xuống cuối cùng
-function scrollToBottom() {
-  const chatMessages = document.getElementById("chatMessages");
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// Hàm thêm tin nhắn người dùng
-function addUserMessage(text) {
-  const chatMessages = document.getElementById("chatMessages");
-
-  const messageDiv = document.createElement("div");
-  messageDiv.className = "message user-message";
-
-  const container = document.createElement("div");
-  container.className = "message-container";
-
-  const content = document.createElement("div");
-  content.className = "message-content";
-  content.textContent = text;
-
-  container.appendChild(content);
-
-  // Thêm các nút hành động (copy, edit) cho tin nhắn người dùng
-  const actions = document.createElement("div");
-  actions.className = "message-actions user-actions";
-
-  // Nút Copy
-  const copyBtn = document.createElement("button");
-  copyBtn.className = "message-action-btn";
-  copyBtn.innerHTML = `<img src="assets/img/Copy.svg" alt="Copy"> Copy`;
-  copyBtn.addEventListener("click", () => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => alert("Đã sao chép vào clipboard!"))
-      .catch((err) => console.error("Không thể sao chép: ", err));
-  });
-
-  // Nút Chỉnh sửa
-  const editBtn = document.createElement("button");
-  editBtn.className = "message-action-btn";
-  editBtn.innerHTML = `<img src="assets/img/Pencil.svg" alt="Edit"> Chỉnh sửa`;
-  editBtn.addEventListener("click", () => {
-    // Đổ nội dung vào ô nhập liệu để chỉnh sửa
-    const userInput = document.getElementById("userInput");
-    userInput.value = text;
-    userInput.focus();
-    userInput.style.height = "auto";
-    userInput.style.height = userInput.scrollHeight + "px";
-
-    // Tùy chọn: Xóa tin nhắn cũ
-    if (confirm("Bạn có muốn xóa tin nhắn cũ để chỉnh sửa không?")) {
-      messageDiv.remove();
+      // Thêm tin nhắn vào khung chat
+      chatMessages.insertAdjacentHTML("beforeend", messageHTML);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-  });
-
-  actions.appendChild(copyBtn);
-  actions.appendChild(editBtn);
-
-  container.appendChild(actions);
-  messageDiv.appendChild(container);
-  chatMessages.appendChild(messageDiv);
-
-  // Scroll to bottom
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// Hàm thêm tin nhắn bot - bỏ nút chỉnh sửa
-function addBotMessage(text) {
-  const chatMessages = document.getElementById("chatMessages");
-
-  const messageDiv = document.createElement("div");
-  messageDiv.className = "message bot-message";
-
-  const container = document.createElement("div");
-  container.className = "message-container";
-
-  const content = document.createElement("div");
-  content.className = "message-content";
-  content.textContent = text;
-
-  container.appendChild(content);
-
-  // Thêm các nút hành động (copy, like, dislike)
-  const actions = document.createElement("div");
-  actions.className = "message-actions";
-
-  // Nút Copy
-  const copyBtn = document.createElement("button");
-  copyBtn.className = "message-action-btn";
-  copyBtn.innerHTML = `<img src="assets/img/Copy.svg" alt="Copy"> Copy`;
-  copyBtn.addEventListener("click", () => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => alert("Đã sao chép vào clipboard!"))
-      .catch((err) => console.error("Không thể sao chép: ", err));
-  });
-
-  // Nút Like
-  const likeBtn = document.createElement("button");
-  likeBtn.className = "message-action-btn";
-  likeBtn.innerHTML = `<img src="assets/img/Facebook Like.svg" alt="Like"> Hữu ích`;
-  likeBtn.addEventListener("click", () => {
-    alert("Cảm ơn bạn đã đánh giá!");
-  });
-
-  // Nút Dislike (dùng thẻ img và xoay 180 độ)
-  const dislikeBtn = document.createElement("button");
-  dislikeBtn.className = "message-action-btn";
-  dislikeBtn.innerHTML = `<img src="assets/img/Facebook Like.svg" alt="Dislike" style="transform: rotate(180deg);"> Không hữu ích`;
-  dislikeBtn.addEventListener("click", () => {
-    alert("Cảm ơn bạn đã đánh giá!");
-  });
-
-  // Đã bỏ nút chỉnh sửa
-
-  actions.appendChild(copyBtn);
-  actions.appendChild(likeBtn);
-  actions.appendChild(dislikeBtn);
-
-  container.appendChild(actions);
-  messageDiv.appendChild(container);
-  chatMessages.appendChild(messageDiv);
-
-  // Scroll to bottom
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// NOTE: Đoạn code cần cải tiến để gọi API
-// 1. Thay vì kiểm tra message === 'hello', cần gửi message đến API
-// 2. Thêm đoạn code gọi API, ví dụ:
-/*
-async function sendMessageToAPI(message) {
-  try {
-    const response = await fetch('URL_API_CỦA_BẠN', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer YOUR_API_KEY'
-      },
-      body: JSON.stringify({
-        message: message
-      })
-    });
-    
-    const data = await response.json();
-    return data.reply; // Giả sử API trả về đối tượng có trường reply
-  } catch (error) {
-    console.error('Lỗi khi gọi API:', error);
-    return 'Có lỗi xảy ra khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.';
   }
-}
 
-// Thay đoạn xử lý phản hồi bằng:
-const botReply = await sendMessageToAPI(message);
-addBotMessage(botReply);
-*/
+  // Hiển thị đang gõ...
+  function showTypingIndicator() {
+    const typingHTML = `
+      <div class="message bot-message typing-indicator">
+        <div class="message-container">
+          <div class="message-content">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    `;
+    appendMessageToChat(typingHTML);
+  }
+
+  // Ẩn đang gõ...
+  function hideTypingIndicator() {
+    const typingIndicator = document.querySelector(".typing-indicator");
+    if (typingIndicator) {
+      typingIndicator.remove();
+    }
+  }
+
+  // Reset chat
+  function resetChat() {
+    if (chatMessages) {
+      chatMessages.innerHTML = "";
+    }
+
+    if (mainContent) {
+      mainContent.classList.remove("has-messages");
+    }
+  }
+
+  // Utility: Escape HTML để tránh XSS
+  function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Đặt các hàm xử lý tin nhắn lên window để có thể gọi từ HTML
+  window.copyMessage = function (button) {
+    const messageContent = button
+      .closest(".message")
+      .querySelector(".message-content").textContent;
+    navigator.clipboard.writeText(messageContent);
+
+    // Optional: hiển thị thông báo đã copy
+    const original = button.innerHTML;
+    button.innerHTML = '<img src="assets/img/Copy.svg" alt="Copy">Đã sao chép';
+    setTimeout(() => {
+      button.innerHTML = original;
+    }, 1000);
+  };
+
+  window.editMessage = function (button) {
+    const messageElement = button.closest(".message");
+    const messageContent =
+      messageElement.querySelector(".message-content").textContent;
+
+    // Đưa nội dung tin nhắn vào ô input để chỉnh sửa
+    if (userInput) {
+      userInput.value = messageContent;
+      userInput.focus();
+      userInput.style.height = "auto";
+      userInput.style.height = userInput.scrollHeight + "px";
+
+      // Xóa tin nhắn cũ (tùy chọn)
+      // messageElement.remove();
+    }
+  };
+
+  window.likeMessage = function (button) {
+    toggleActiveClass(button);
+    // Ở đây có thể thêm code gửi feedback về API
+  };
+
+  window.dislikeMessage = function (button) {
+    toggleActiveClass(button);
+    // Ở đây có thể thêm code gửi feedback về API
+  };
+
+  function toggleActiveClass(button) {
+    // Kiểm tra nếu nút đã active
+    const isActive = button.classList.contains("active");
+
+    // Bỏ active từ tất cả các nút trong cùng nhóm actions
+    const actionBtns = button
+      .closest(".message-actions")
+      .querySelectorAll(".message-action-btn");
+    actionBtns.forEach((btn) => {
+      if (
+        btn.classList.contains("like-btn") ||
+        btn.classList.contains("dislike-btn")
+      ) {
+        btn.classList.remove("active");
+      }
+    });
+
+    // Toggle active cho nút được click
+    if (!isActive) {
+      button.classList.add("active");
+    }
+  }
+
+  // Tối ưu hóa viewport (đơn giản)
+  function optimizeViewport() {
+    if (window.innerWidth >= 992 && mainContent) {
+      const header = document.querySelector(".header");
+      const headerHeight = header ? header.offsetHeight : 70;
+      mainContent.style.height = `${window.innerHeight - headerHeight}px`;
+    }
+  }
+
+  window.addEventListener("load", optimizeViewport);
+  window.addEventListener("resize", optimizeViewport);
+});
