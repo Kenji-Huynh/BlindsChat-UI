@@ -23,7 +23,7 @@ body {
   align-items: center;
   padding: 15px 20px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -258,6 +258,12 @@ body {
   display: flex;
   margin-top: 8px;
   gap: 8px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.message:hover .message-actions {
+  opacity: 1;
 }
 
 .message-action-btn {
@@ -275,6 +281,27 @@ body {
   width: 16px;
   height: 16px;
   margin-right: 4px;
+}
+
+/* Styling cho nút like/dislike khi active */
+.message-action-btn.active {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #2174d8;
+  font-weight: 500;
+}
+
+.message-action-btn.like-btn.active {
+  color: #4267b2; /* Màu Facebook like */
+}
+
+.message-action-btn.dislike-btn.active {
+  color: #e53935; /* Màu dislike */
+}
+
+/* Hiệu ứng hover cho các nút */
+.message-action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
 }
 
 /* Khi có tin nhắn, ẩn greeting */
@@ -431,4 +458,927 @@ body {
 .logo .dropdown {
   margin-left: 8px;
   cursor: pointer;
+}
+
+/* Style cho pricing plans trên màn hình lớn hơn */
+@media (min-width: 768px) {
+  .pricing-plans {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .plan-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .plan {
+    flex: 1;
+    max-width: 250px;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .plan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .plan-period {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .hosting-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .hosting-btn {
+    min-width: 180px;
+  }
+}
+
+/* Styles cho pricing plans trên desktop */
+
+/* Base styling cho pricing plans */
+.pricing-plans {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ẩn bảng giá khi có tin nhắn */
+.main-content.has-messages .pricing-plans {
+  display: none;
+}
+
+/* Plan container - layout desktop */
+.plan-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+/* Style chung cho các plan */
+.plan {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hover effect cho plan */
+.plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Style cho từng loại plan */
+.startup {
+  background-color: #2174d8;
+  color: white;
+  border-right: 5px solid #1555a0;
+}
+
+.semi-pro {
+  background-color: #f18d24;
+  color: white;
+  border-right: 5px solid #d17620;
+}
+
+.pro {
+  background-color: #df246b;
+  color: white;
+  border-right: 5px solid #b81e56;
+}
+
+/* Thẻ plan */
+.plan-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-weight: 600;
+  padding: 6px 16px;
+  font-size: 18px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Giá của plan */
+.plan-price {
+  margin-top: 50px;
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.current-price {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.original-price {
+  font-size: 18px;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* Chi tiết plan */
+.plan-details {
+  padding: 0 25px 20px;
+  flex: 1;
+}
+
+.plan-feature {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* Nút chọn thời hạn */
+.plan-period {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  max-width: 600px;
+}
+
+.period-btn {
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.period-btn:hover {
+  background-color: #f9f9f9;
+}
+
+.period-btn.active {
+  background-color: #f0f0f0;
+  border-color: #d0d0d0;
+  font-weight: 600;
+}
+
+/* Các nút hosting actions */
+.hosting-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.hosting-btn {
+  background-color: #2174d8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  min-width: 200px;
+}
+
+.hosting-btn:hover {
+  background-color: #1a5bab;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* Cải thiện hiển thị pricing plans trên desktop */
+
+/* Ẩn layout mobile trên desktop */
+.mobile-plans {
+  display: none;
+}
+
+/* Base styling cho pricing plans */
+.pricing-plans {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Ẩn bảng giá khi có tin nhắn */
+.main-content.has-messages .pricing-plans {
+  display: none;
+}
+
+/* Plan container - layout desktop */
+.plan-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/* Tối ưu kích thước desktop cho viewport */
+@media (min-width: 992px) {
+  .pricing-plans {
+    padding: 0;
+    max-height: calc(100vh - 220px);
+    overflow: visible;
+  }
+
+  .plan-container {
+    margin-bottom: 25px;
+  }
+
+  .plan {
+    flex: 1;
+    max-width: 250px;
+    min-height: 180px;
+    padding-bottom: 10px;
+  }
+
+  .plan-price {
+    margin-top: 40px;
+    padding: 8px 20px;
+  }
+
+  .current-price {
+    font-size: 20px;
+  }
+
+  .original-price {
+    font-size: 16px;
+  }
+
+  .plan-details {
+    padding: 0 20px 10px;
+  }
+
+  .plan-feature {
+    margin-top: 8px;
+    font-size: 15px;
+  }
+
+  .plan-period {
+    margin-bottom: 25px;
+  }
+
+  .period-btn {
+    padding: 8px 15px;
+    font-size: 15px;
+  }
+
+  .hosting-actions {
+    gap: 15px;
+    margin-bottom: 0;
+  }
+
+  .hosting-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+    min-width: 180px;
+  }
+}
+
+/* Đặc biệt cho màn hình thấp */
+@media (max-height: 700px) and (min-width: 992px) {
+  .pricing-plans {
+    max-height: calc(100vh - 180px);
+  }
+
+  .plan {
+    min-height: 160px;
+  }
+
+  .plan-price {
+    margin-top: 35px;
+    padding: 5px 15px;
+  }
+
+  .plan-details {
+    padding: 0 15px 5px;
+  }
+
+  .plan-feature {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .period-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .hosting-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}
+
+/* Animation cho desktop */
+@media (min-width: 768px) {
+  .plan {
+    animation-delay: 0.05s;
+  }
+
+  .plan:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .plan:nth-child(3) {
+    animation-delay: 0.25s;
+  }
+
+  .plan-period {
+    animation-delay: 0.35s;
+  }
+
+  .hosting-actions {
+    animation-delay: 0.45s;
+  }
+}
+
+/* Hiển thị mobile layout trên màn hình nhỏ */
+@media (max-width: 767px) {
+  .plan-container {
+    display: none;
+  }
+
+  .mobile-plans {
+    display: flex;
+  }
+}
+
+/* Cụ thể cho desktop */
+@media (min-width: 992px) {
+  .pricing-plans {
+    padding-top: 30px;
+  }
+
+  .plan-container {
+    margin-bottom: 50px;
+  }
+
+  .plan {
+    flex: 1;
+    max-width: 280px;
+    min-height: 220px;
+    padding-bottom: 15px;
+  }
+
+  .hosting-btn {
+    padding: 16px 30px;
+    font-size: 17px;
+  }
+}
+
+/* Desktop lớn */
+@media (min-width: 1400px) {
+  .pricing-plans {
+    max-width: 1200px;
+  }
+
+  .plan {
+    max-width: 320px;
+  }
+}
+
+/* Màn hình trung bình */
+@media (min-width: 768px) and (max-width: 991px) {
+  .plan-container {
+    gap: 20px;
+  }
+
+  .plan {
+    padding: 0 15px 15px;
+    max-width: 250px;
+  }
+
+  .plan-price {
+    padding: 8px 15px;
+  }
+
+  .current-price {
+    font-size: 22px;
+  }
+
+  .original-price {
+    font-size: 16px;
+  }
+
+  .plan-details {
+    padding: 0 15px 15px;
+  }
+
+  .plan-feature {
+    font-size: 15px;
+  }
+
+  .hosting-actions {
+    flex-wrap: wrap;
+  }
+
+  .hosting-btn {
+    flex: 1;
+    min-width: 180px;
+  }
+}
+
+/* Hiệu ứng khi chọn gói */
+.plan.selected {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+}
+
+/* Animation khi load trang */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.plan {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.plan:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.plan:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.plan:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.plan-period {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.7s;
+  opacity: 0;
+}
+
+.hosting-actions {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.9s;
+  opacity: 0;
+}
+
+/* Thêm vào cuối file */
+
+/* Typing indicator */
+.typing-indicator .message-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #999;
+  margin: 0 2px;
+  animation: bounce 1.4s infinite ease-in-out;
+  transform: translateY(0);
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Thêm vào cuối file style.css - Thiết kế mới cho plans trên desktop */
+
+/* Base styling cho pricing plans */
+.pricing-plans {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+}
+
+/* Ẩn bảng giá khi có tin nhắn */
+.main-content.has-messages .pricing-plans {
+  display: none;
+}
+
+/* Plan container - layout desktop */
+.plan-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+/* Style chung cho các plan */
+.plan {
+  position: relative;
+  border-radius: 16px;
+  overflow: visible;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  flex: 1;
+  max-width: 270px;
+}
+
+/* Hover effect cho plan */
+.plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+/* Style cho từng loại plan */
+.plan.startup {
+  border-top: 4px solid #2174d8;
+}
+
+.plan.semi-pro {
+  border-top: 4px solid #f18d24;
+}
+
+.plan.pro {
+  border-top: 4px solid #df246b;
+}
+
+/* Badge cho plan nổi bật */
+.plan-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background-color: #2174d8;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(33, 116, 216, 0.3);
+}
+
+.pro-badge {
+  background-color: #df246b;
+  box-shadow: 0 2px 8px rgba(223, 36, 107, 0.3);
+}
+
+/* Header của plan */
+.plan-header {
+  text-align: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.plan-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.startup .plan-title {
+  color: #2174d8;
+}
+
+.semi-pro .plan-title {
+  color: #f18d24;
+}
+
+.pro .plan-title {
+  color: #df246b;
+}
+
+.plan-price-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.plan-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.current-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.original-price {
+  font-size: 14px;
+  text-decoration: line-through;
+  opacity: 0.6;
+  color: #777;
+}
+
+.discount-badge {
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Specs của plan */
+.plan-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  gap: 8px;
+}
+
+.spec-item.disabled {
+  color: #999;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.spec-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.startup .spec-icon {
+  color: #2174d8;
+}
+
+.semi-pro .spec-icon {
+  color: #f18d24;
+}
+
+.pro .spec-icon {
+  color: #df246b;
+}
+
+.spec-item.disabled .spec-icon {
+  color: #999;
+}
+
+/* Nút chọn thời hạn */
+.plan-period {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.period-btn {
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  text-align: center;
+}
+
+.period-btn:hover {
+  background-color: #f9f9f9;
+  border-color: #ccc;
+}
+
+.period-btn.active {
+  background-color: #f0f0f0;
+  border-color: #2174d8;
+  color: #2174d8;
+  font-weight: 500;
+}
+
+/* Các nút hosting actions */
+.hosting-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 700px;
+  flex-wrap: wrap;
+}
+
+.hosting-btn {
+  background-color: #2174d8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  min-width: 180px;
+  box-shadow: 0 3px 8px rgba(33, 116, 216, 0.2);
+}
+
+.hosting-btn:hover {
+  background-color: #1a5bab;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(33, 116, 216, 0.25);
+}
+
+.hosting-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Animation khi load trang */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.plan {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.plan:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.plan:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.plan:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.plan-period {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.hosting-actions {
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+/* Sửa lỗi cho send-btn */
+
+/* Common styles cho nút send */
+.send-btn {
+  position: absolute;
+  right: 15px;
+  bottom: 50%;
+  transform: translateY(50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #2174d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  padding: 5px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.send-btn:hover {
+  transform: translateY(50%) scale(1.1);
+  background-color: rgba(33, 116, 216, 0.1);
+}
+
+.send-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Đảm bảo input không bị che bởi nút */
+.chat-input {
+  width: 100%;
+  padding: 16px 45px 16px 16px;
+}
+
+/* Hiệu ứng khi click */
+.send-btn:active {
+  transform: translateY(50%) scale(0.95);
+}
+
+/* Màn hình vừa và nhỏ */
+@media (max-width: 992px) {
+  .plan-container {
+    gap: 15px;
+  }
+
+  .plan {
+    padding: 16px 12px;
+    max-width: 240px;
+  }
+
+  .plan-title {
+    font-size: 18px;
+  }
+
+  .current-price {
+    font-size: 18px;
+  }
+
+  .spec-item {
+    font-size: 13px;
+  }
 }
