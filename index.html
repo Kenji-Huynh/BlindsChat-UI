@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlindChat</title>
+    <title>BlindsChat</title>
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/responsive.css" />
   </head>
@@ -17,7 +17,7 @@
             width="20"
             height="20"
           />
-          BlindChat
+          BlindsChat
           <span class="dropdown">
             <svg
               width="16"
@@ -59,8 +59,229 @@
         <!-- Tin nhắn sẽ hiển thị ở đây -->
       </div>
 
-      <!-- Tin nhắn chào mừng - sẽ ẩn khi có tin nhắn -->
-      <h1 class="greeting">Tôi có thể giúp gì cho bạn?</h1>
+      <!-- Thay thế phần pricing plans hiện tại bằng thiết kế mới -->
+      <div class="pricing-plans">
+        <!-- Desktop layout -->
+        <div class="plan-container">
+          <div class="plan startup">
+            <span class="plan-badge">Phổ biến</span>
+            <div class="plan-header">
+              <h3 class="plan-title">Startup</h3>
+              <div class="plan-price-container">
+                <div class="plan-price">
+                  <span class="current-price">37.500 đ</span>
+                  <span class="original-price">60.000 đ</span>
+                </div>
+                <div class="discount-badge">-38%</div>
+              </div>
+            </div>
+            <div class="plan-specs">
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>1 GB dung lượng</span>
+              </div>
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>Không giới hạn băng thông</span>
+              </div>
+              <div class="spec-item disabled">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22 2 17.5 2 12 6.5 2 12 2M4 12C4 16.4 7.6 20 12 20S20 16.4 20 12 16.4 4 12 4 4 7.6 4 12M9.4 10.6L12 13.2L14.6 10.6L16 12L13.4 14.6L16 17.2L14.6 18.6L12 16L9.4 18.6L8 17.2L10.6 14.6L8 12L9.4 10.6Z"
+                  />
+                </svg>
+                <span>SSL miễn phí</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="plan semi-pro">
+            <div class="plan-header">
+              <h3 class="plan-title">Semi Pro</h3>
+              <div class="plan-price-container">
+                <div class="plan-price">
+                  <span class="current-price">83.500 đ</span>
+                  <span class="original-price">120.000 đ</span>
+                </div>
+                <div class="discount-badge">-30%</div>
+              </div>
+            </div>
+            <div class="plan-specs">
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>3 GB dung lượng</span>
+              </div>
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>Không giới hạn băng thông</span>
+              </div>
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>SSL miễn phí</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="plan pro">
+            <span class="plan-badge pro-badge">Cao cấp</span>
+            <div class="plan-header">
+              <h3 class="plan-title">Pro 01</h3>
+              <div class="plan-price-container">
+                <div class="plan-price">
+                  <span class="current-price">187.500 đ</span>
+                  <span class="original-price">250.000 đ</span>
+                </div>
+                <div class="discount-badge">-25%</div>
+              </div>
+            </div>
+            <div class="plan-specs">
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>5 GB dung lượng</span>
+              </div>
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>Không giới hạn băng thông</span>
+              </div>
+              <div class="spec-item">
+                <svg class="spec-icon" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"
+                  />
+                </svg>
+                <span>SSL miễn phí</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile layout -->
+        <div class="mobile-plans">
+          <div class="mobile-plan startup">
+            <span class="mobile-badge">Phổ biến</span>
+            <div class="mobile-plan-tag">
+              <span>Startup</span>
+            </div>
+            <div class="mobile-plan-details">
+              <div class="mobile-plan-price">
+                <span class="mobile-current-price">37.500 đ</span>
+                <span class="mobile-original-price">60.000 đ</span>
+              </div>
+              <div class="mobile-plan-features">
+                1 GB<br />
+                Không giới hạn băng thông
+              </div>
+            </div>
+          </div>
+
+          <div class="mobile-plan semi-pro">
+            <div class="mobile-plan-tag">
+              <span>Semi<br />Pro</span>
+            </div>
+            <div class="mobile-plan-details">
+              <div class="mobile-plan-price">
+                <span class="mobile-current-price">83.500 đ</span>
+                <span class="mobile-original-price">120.000 đ</span>
+              </div>
+              <div class="mobile-plan-features">
+                3 GB<br />
+                Không giới hạn băng thông
+              </div>
+            </div>
+          </div>
+
+          <div class="mobile-plan pro">
+            <span class="mobile-badge pro-badge">Cao cấp</span>
+            <div class="mobile-plan-tag">
+              <span>Pro<br />01</span>
+            </div>
+            <div class="mobile-plan-details">
+              <div class="mobile-plan-price">
+                <span class="mobile-current-price">187.500 đ</span>
+                <span class="mobile-original-price">250.000 đ</span>
+              </div>
+              <div class="mobile-plan-features">
+                5 GB<br />
+                Không giới hạn băng thông
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-period">
+          <button class="period-btn active">3 tháng</button>
+          <button class="period-btn">6 tháng</button>
+          <button class="period-btn">12 tháng</button>
+          <button class="period-btn">24 tháng</button>
+        </div>
+
+        <div class="hosting-actions">
+          <button class="hosting-btn domain-btn">
+            <svg class="hosting-icon" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,10.5A1.5,1.5 0 0,0 10.5,12A1.5,1.5 0 0,0 12,13.5A1.5,1.5 0 0,0 13.5,12A1.5,1.5 0 0,0 12,10.5M7.5,10.5A1.5,1.5 0 0,0 6,12A1.5,1.5 0 0,0 7.5,13.5A1.5,1.5 0 0,0 9,12A1.5,1.5 0 0,0 7.5,10.5M16.5,10.5A1.5,1.5 0 0,0 15,12A1.5,1.5 0 0,0 16.5,13.5A1.5,1.5 0 0,0 18,12A1.5,1.5 0 0,0 16.5,10.5Z"
+              />
+            </svg>
+            Mua tên miền
+          </button>
+          <button class="hosting-btn hosting-package-btn">
+            <svg class="hosting-icon" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M4,1H20A1,1 0 0,1 21,2V6A1,1 0 0,1 20,7H4A1,1 0 0,1 3,6V2A1,1 0 0,1 4,1M4,9H20A1,1 0 0,1 21,10V14A1,1 0 0,1 20,15H4A1,1 0 0,1 3,14V10A1,1 0 0,1 4,9M4,17H20A1,1 0 0,1 21,18V22A1,1 0 0,1 20,23H4A1,1 0 0,1 3,22V18A1,1 0 0,1 4,17M9,5H10V3H9V5M9,13H10V11H9V13M9,21H10V19H9V21M5,3V5H7V3H5M5,11V13H7V11H5M5,19V21H7V19H5Z"
+              />
+            </svg>
+            Mua gói hosting
+          </button>
+          <button class="hosting-btn info-btn">
+            <svg class="hosting-icon" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
+              />
+            </svg>
+            Hỏi thêm thông tin
+          </button>
+        </div>
+      </div>
 
       <!-- Thêm container bao bọc input và actions -->
       <div class="input-actions-container">
@@ -70,13 +291,18 @@
             id="userInput"
             placeholder="Hỏi bất kỳ điều gì"
           ></textarea>
-          <button class="mic-button">
-            <img
-              src="assets/img/Voice Recorder.svg"
-              alt="Voice Recorder Icon"
-              width="20"
-              height="20"
-            />
+          <button class="send-btn">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
           </button>
         </div>
 
