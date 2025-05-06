@@ -1,0 +1,201 @@
+/* Responsive styles for BlindsChatGPT UI */
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.show {
+    left: 0;
+  }
+
+  .logo-mobile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-color);
+  }
+
+  .feature-buttons {
+    max-width: calc(100% - 40px);
+  }
+
+  .welcome-message h1 {
+    font-size: 28px;
+  }
+
+  .header {
+    padding: 10px 15px;
+  }
+
+  .main-content {
+    padding: 15px;
+    height: calc(100vh - 60px);
+  }
+
+  .greeting {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .action-btn {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .welcome-message h1 {
+    font-size: 24px;
+  }
+
+  .input-area {
+    padding: 12px;
+  }
+
+  .feature-buttons {
+    max-width: calc(100% - 40px);
+  }
+
+  .auth-buttons {
+    gap: 6px;
+  }
+
+  .btn-login,
+  .btn-signup {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .help-button {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .help-button button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+  .logo-container {
+    padding: 8px;
+  }
+
+  .login-btn,
+  .signup-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+  }
+
+  .signup-btn {
+    background-color: black;
+    color: white;
+    border: none;
+  }
+
+  .main-content {
+    padding: 10px;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .greeting {
+    font-size: 22px;
+    font-weight: 500;
+    margin: auto 0;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .input-actions-container {
+    width: 100%;
+    margin-top: auto;
+    padding: 10px 0;
+  }
+
+  .chat-input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .chat-input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    font-size: 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .mic-button {
+    position: absolute;
+    right: 12px;
+    bottom: 50%;
+    transform: translateY(50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .actions {
+    display: none;
+  }
+
+  .help-btn {
+    display: none;
+  }
+
+  .chat-messages {
+    max-height: calc(100vh - 160px);
+    padding: 10px 0;
+  }
+
+  .message-content {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .message-action-btn {
+    font-size: 11px;
+    padding: 3px;
+  }
+
+  .message-action-btn img {
+    width: 14px;
+    height: 14px;
+  }
+
+  .disclaimer {
+    font-size: 11px;
+    margin-top: 5px;
+  }
+}

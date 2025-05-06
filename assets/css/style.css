@@ -1,0 +1,434 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Điều chỉnh body để có căn giữa tốt hơn */
+body {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Điều chỉnh header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo và dropdown menu */
+.logo {
+  position: relative;
+  font-weight: 600;
+  font-size: 18px;
+  color: #535353;
+  transition: 0.3s all ease;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.logo:hover .logo-container {
+  background-color: #f5f5f5;
+}
+
+/* Chỉnh sửa dropdown menu để có màu đen */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: auto;
+  min-width: 180px;
+  background-color: #000000;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 8px 0;
+  display: none;
+  z-index: 100;
+  margin-top: 5px;
+}
+
+.logo:hover .dropdown-menu {
+  display: block;
+}
+
+/* Đổi màu chữ trong dropdown menu thành trắng */
+.dropdown-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #ffffff;
+}
+
+.dropdown-option:hover {
+  background-color: #333333;
+}
+
+.dropdown-option svg {
+  margin-right: 8px;
+  stroke: #ffffff;
+}
+
+/* Sửa màu tam giác trỏ lên thành màu đen */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  width: 16px;
+  height: 16px;
+  background-color: #000000;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.login-btn {
+  background-color: #000;
+  color: white;
+  border: none;
+}
+
+.signup-btn {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #e6e6e6;
+}
+
+.new-chat-btn {
+  margin: 20px;
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+/* Điều chỉnh main-content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa theo chiều dọc khi không có tin nhắn */
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  height: calc(100vh - 80px);
+  position: relative;
+}
+
+/* Đảm bảo center alignment cho tất cả các phần tử con trực tiếp */
+.main-content > * {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Khi có tin nhắn, thay đổi layout */
+.main-content.has-messages {
+  justify-content: space-between;
+}
+
+/* Thêm container bao bọc input và actions khi có tin nhắn */
+.input-actions-container {
+  width: 100%;
+  background-color: white;
+  padding-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Khi không có tin nhắn, đảm bảo input-actions-container có căn giữa */
+.main-content:not(.has-messages) .input-actions-container {
+  max-width: 600px;
+}
+
+/* Khi có tin nhắn, giữ nguyên chiều rộng đầy đủ cho input-actions-container */
+.main-content.has-messages .input-actions-container {
+  width: 100%;
+}
+
+/* Điều chỉnh chat messages */
+.chat-messages {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: none;
+  overflow-y: auto;
+  flex: 1;
+  max-height: calc(100vh - 220px);
+}
+
+/* Hiển thị chat messages khi có tin nhắn */
+.main-content.has-messages .chat-messages {
+  display: block;
+}
+
+/* Style cho tin nhắn người dùng và bot */
+.message {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* User message */
+.user-message .message-container {
+  align-items: flex-end;
+}
+
+.user-message .message-content {
+  background-color: #000;
+  color: white;
+  border-radius: 18px;
+  padding: 10px 16px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+/* Điều chỉnh vị trí các nút hành động cho tin nhắn của người dùng */
+.user-message .message-actions {
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+/* Thêm style cho các nút hành động người dùng */
+.user-actions {
+  display: flex;
+  margin-top: 8px;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* Bot message */
+.bot-message .message-container {
+  align-items: flex-start;
+}
+
+.bot-message .message-content {
+  background-color: #f0f0f0;
+  color: #000;
+  border-radius: 18px;
+  padding: 10px 16px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+/* Actions for bot messages */
+.message-actions {
+  display: flex;
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.message-action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  color: #777;
+  font-size: 12px;
+}
+
+.message-action-btn img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+/* Khi có tin nhắn, ẩn greeting */
+.main-content.has-messages .greeting {
+  display: none;
+}
+
+/* Khi có tin nhắn, phần greeting biến mất còn chat-messages hiển thị */
+.main-content.has-messages .chat-messages {
+  display: block;
+  grid-row: 1;
+}
+
+/* Sửa lại kích thước greeting */
+.greeting {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Đảm bảo disclaimer nằm giữa màn hình */
+.disclaimer {
+  position: relative;
+  text-align: center;
+  color: #777;
+  font-size: 12px;
+  width: 100%;
+  padding: 0 20px;
+  display: none;
+  margin: 10px 0;
+}
+
+/* Hiển thị disclaimer khi có tin nhắn */
+.main-content.has-messages .disclaimer {
+  display: block;
+}
+
+/* Điều chỉnh vị trí input và các nút action khi có tin nhắn */
+.main-content.has-messages .chat-input-container,
+.main-content.has-messages .actions {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  align-self: flex-end;
+  margin-bottom: 5px;
+}
+
+/* Điều chỉnh chat-input-container để căn giữa chính xác */
+.chat-input-container {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e6e6e6;
+  border-radius: 30px;
+  box-shadow: 2px 3px 6px 0px #00000026;
+  font-size: 16px;
+  resize: none;
+  min-height: 60px;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: #ccc;
+}
+
+.mic-button {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #777;
+}
+
+/* Điều chỉnh actions và chat-input-container */
+.actions {
+  display: flex;
+  margin-top: 15px;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
+  margin: 15px auto 0;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border: 1px solid #e6e6e6;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+  /* Thêm transition để hiệu ứng xuất hiện từ từ */
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Thêm hiệu ứng khi hover */
+.action-btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Hiệu ứng khi click */
+.action-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn svg {
+  margin-right: 8px;
+}
+
+/* Điều chỉnh position của help-btn */
+.help-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* SVG và img padding */
+.logo img,
+.logo svg,
+.action-btn img,
+.action-btn svg {
+  margin-right: 8px;
+}
+
+/* Điều chỉnh khoảng cách cho dropdown icon */
+.logo .dropdown {
+  margin-left: 8px;
+  cursor: pointer;
+}
